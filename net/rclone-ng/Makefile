@@ -38,6 +38,8 @@ endef
 define Package/rclone-ng/install
 	$(INSTALL_DIR) $(1)/www
 	$(CP) $(PKG_BUILD_DIR)/RcloneNg $(1)/www
+	$(INSTALL_DATA) $(TOPDIR)/custom/rclone-fixes/files/rclone-ui-zh-cn.js $(1)/www/RcloneNg/zh-cn.js
+	$(SED) 's#</body>#<script src="zh-cn.js"></script></body>#' $(1)/www/RcloneNg/index.html
 endef
 
 $(eval $(call BuildPackage,rclone-ng))

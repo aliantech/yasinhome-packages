@@ -42,6 +42,8 @@ endef
 define Package/rclone-webui-react/install
 	$(INSTALL_DIR) $(1)/www/rclone-webui-react
 	$(CP) $(PKG_BUILD_DIR)/build/* $(1)/www/rclone-webui-react
+	$(INSTALL_DATA) $(TOPDIR)/custom/rclone-fixes/files/rclone-ui-zh-cn.js $(1)/www/rclone-webui-react/zh-cn.js
+	$(SED) 's#</body>#<script src="zh-cn.js"></script></body>#' $(1)/www/rclone-webui-react/index.html
 endef
 
 $(eval $(call BuildPackage,rclone-webui-react))
